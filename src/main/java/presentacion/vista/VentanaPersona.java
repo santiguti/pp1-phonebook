@@ -4,6 +4,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
@@ -14,8 +15,8 @@ public class VentanaPersona extends JFrame
 	private JTextField txtNombre;
 	private JTextField txtTelefono;
 	private JTextField txtCalle;
-	private JTextField txtAltura;
-	private JTextField txtPiso;
+	private JSpinner txtAltura;
+	private JSpinner txtPiso;
 	private JTextField txtDepto;
 	private JButton btnAgregarPersona;
 	private static VentanaPersona INSTANCE;
@@ -95,20 +96,21 @@ public class VentanaPersona extends JFrame
 		panel.add(txtCalle);
 		txtCalle.setColumns(10);
 		
-		txtAltura = new JTextField();
+		txtAltura = new JSpinner();
 		txtAltura.setBounds(133, 131, 164, 20);
 		panel.add(txtAltura);
-		txtAltura.setColumns(10);
+		//txtAltura.setColumns(10);
 		
-		txtPiso = new JTextField();
+		txtPiso = new JSpinner();
 		txtPiso.setBounds(133, 172, 164, 20);
 		panel.add(txtPiso);
-		txtPiso.setColumns(10);
+		//txtPiso.setColumns(10);
 		
 		txtDepto = new JTextField();
 		txtDepto.setBounds(133, 213, 164, 20);
 		panel.add(txtDepto);
 		txtDepto.setColumns(10);
+		
 		
 		btnAgregarPersona = new JButton("Agregar");
 		btnAgregarPersona.setBounds(208, 339, 89, 23);
@@ -130,6 +132,26 @@ public class VentanaPersona extends JFrame
 	public JTextField getTxtTelefono() 
 	{
 		return txtTelefono;
+	}
+	
+	public JTextField getTxtCalle() 
+	{
+		return txtCalle;
+	}
+	
+	public JSpinner getSpinAltura() 
+	{
+		return txtAltura;
+	}
+	
+	public JSpinner getSpinPiso() 
+	{
+		return txtPiso;
+	}
+	
+	public JTextField getTxtDepto() 
+	{
+		return txtDepto;
 	}
 
 	public JButton getBtnAgregarPersona() 

@@ -8,6 +8,7 @@ import modelo.Agenda;
 import presentacion.reportes.ReporteAgenda;
 import presentacion.vista.VentanaPersona;
 import presentacion.vista.Vista;
+import dto.Domicilio;
 import dto.PersonaDTO;
 
 public class Controlador implements ActionListener
@@ -33,9 +34,18 @@ public class Controlador implements ActionListener
 		}
 
 		private void guardarPersona(ActionEvent p) {
+			Domicilio domicilio = new Domicilio();
+			domicilio.setCalle(this.ventanaPersona.getTxtCalle().getText());
+			domicilio.setAltura((int) this.ventanaPersona.getSpinAltura().getValue());
+			domicilio.setPiso((int) this.ventanaPersona.getSpinPiso().getValue());
+			domicilio.setDepto(this.ventanaPersona.getTxtDepto().getText());
+			//cargar domicilios desde el json. Google: jcombobox value from json
+			//lo mismo para las provincias q estan en el json
+			//Sino hago una clase loader que pone las provincias en arrays y fue
+						
 			String nombre = this.ventanaPersona.getTxtNombre().getText();
 			String tel = this.ventanaPersona.getTxtTelefono().getText();
-			PersonaDTO nuevaPersona = new PersonaDTO(0, nombre, tel);
+			PersonaDTO nuevaPersona = new PersonaDTO(0, nombre, tel, domicilio);
 			this.agenda.agregarPersona(nuevaPersona);
 			this.refrescarTabla();
 			this.ventanaPersona.cerrar();

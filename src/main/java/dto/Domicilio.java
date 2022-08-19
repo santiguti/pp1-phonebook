@@ -10,6 +10,11 @@ public class Domicilio
 	private String provincia;
 	private String localidad;
 	
+	public Domicilio()
+	{
+		
+	}
+	
 	public Domicilio(int idPersona, String calle, int altura, int piso, String depto, String provincia, String localidad) 
 	{
 		this.setIdPersona(idPersona);

@@ -96,6 +96,6 @@ public class PersonaDAOSQL implements PersonaDAO
 		int id = resultSet.getInt("idPersona");
 		String nombre = resultSet.getString("Nombre");
 		String tel = resultSet.getString("Telefono");
-		return new PersonaDTO(id, nombre, tel);
+		return new PersonaDTO(id, nombre, tel, null); //null seria el domicilio. Ver como en esta query agregar el domicilio
 	}
 }
