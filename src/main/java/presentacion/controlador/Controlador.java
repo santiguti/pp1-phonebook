@@ -39,9 +39,8 @@ public class Controlador implements ActionListener
 			domicilio.setAltura((int) this.ventanaPersona.getSpinAltura().getValue());
 			domicilio.setPiso((int) this.ventanaPersona.getSpinPiso().getValue());
 			domicilio.setDepto(this.ventanaPersona.getTxtDepto().getText());
-			//cargar domicilios desde el json. Google: jcombobox value from json
-			//lo mismo para las provincias q estan en el json
-			//Sino hago una clase loader que pone las provincias en arrays y fue
+			domicilio.setProvincia(this.ventanaPersona.getComboProv().getSelectedItem().toString());
+			domicilio.setLocalidad(this.ventanaPersona.getComboLocal().getSelectedItem().toString());
 						
 			String nombre = this.ventanaPersona.getTxtNombre().getText();
 			String tel = this.ventanaPersona.getTxtTelefono().getText();

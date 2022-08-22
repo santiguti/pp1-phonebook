@@ -1,12 +1,15 @@
 package presentacion.vista;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import dto.DomicilioHelper;
 
 public class VentanaPersona extends JFrame 
 {
@@ -15,9 +18,11 @@ public class VentanaPersona extends JFrame
 	private JTextField txtNombre;
 	private JTextField txtTelefono;
 	private JTextField txtCalle;
-	private JSpinner txtAltura;
-	private JSpinner txtPiso;
+	private JSpinner spinAltura;
+	private JSpinner spinPiso;
 	private JTextField txtDepto;
+	private JComboBox comboProv;
+	private JComboBox comboLocal;	
 	private JButton btnAgregarPersona;
 	private static VentanaPersona INSTANCE;
 	
@@ -35,6 +40,9 @@ public class VentanaPersona extends JFrame
 	private VentanaPersona() 
 	{
 		super();
+		DomicilioHelper dmhelp = new DomicilioHelper();
+		dmhelp.parseLocalidades();
+		dmhelp.parseProvincias();
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 343, 183);
@@ -96,21 +104,26 @@ public class VentanaPersona extends JFrame
 		panel.add(txtCalle);
 		txtCalle.setColumns(10);
 		
-		txtAltura = new JSpinner();
-		txtAltura.setBounds(133, 131, 164, 20);
-		panel.add(txtAltura);
-		//txtAltura.setColumns(10);
+		spinAltura = new JSpinner();
+		spinAltura.setBounds(133, 131, 164, 20);
+		panel.add(spinAltura);
 		
-		txtPiso = new JSpinner();
-		txtPiso.setBounds(133, 172, 164, 20);
-		panel.add(txtPiso);
-		//txtPiso.setColumns(10);
+		spinPiso = new JSpinner();
+		spinPiso.setBounds(133, 172, 164, 20);
+		panel.add(spinPiso);
 		
 		txtDepto = new JTextField();
 		txtDepto.setBounds(133, 213, 164, 20);
 		panel.add(txtDepto);
 		txtDepto.setColumns(10);
 		
+		comboProv = new JComboBox(dmhelp.getProvinciasArray());
+		comboProv.setBounds(133, 254, 164, 20);
+		panel.add(comboProv);
+		
+		comboLocal = new JComboBox(dmhelp.getLocalidadesArray());
+		comboLocal.setBounds(133, 295, 164, 20);
+		panel.add(comboLocal);
 		
 		btnAgregarPersona = new JButton("Agregar");
 		btnAgregarPersona.setBounds(208, 339, 89, 23);
@@ -141,18 +154,29 @@ public class VentanaPersona extends JFrame
 	
 	public JSpinner getSpinAltura() 
 	{
-		return txtAltura;
+		return spinAltura;
 	}
 	
 	public JSpinner getSpinPiso() 
 	{
-		return txtPiso;
+		return spinPiso;
 	}
 	
 	public JTextField getTxtDepto() 
 	{
 		return txtDepto;
 	}
+	
+	public JComboBox getComboProv() 
+	{
+		return comboProv;
+	}
+
+	public JComboBox getComboLocal() 
+	{
+		return comboLocal;
+	}
+
 
 	public JButton getBtnAgregarPersona() 
 	{
