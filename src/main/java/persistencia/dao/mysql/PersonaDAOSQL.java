@@ -5,8 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-
 import persistencia.conexion.Conexion;
 import persistencia.dao.interfaz.PersonaDAO;
 import dto.PersonaDTO;
@@ -96,6 +96,9 @@ public class PersonaDAOSQL implements PersonaDAO
 		int id = resultSet.getInt("idPersona");
 		String nombre = resultSet.getString("Nombre");
 		String tel = resultSet.getString("Telefono");
-		return new PersonaDTO(id, nombre, tel, null); //null seria el domicilio. Ver como en esta query agregar el domicilio
+		//domicilio??
+		String email = resultSet.getString("Email");
+		Date cumpleanios = resultSet.getDate("Cumpleanios");
+		return new PersonaDTO(id, nombre, tel, null, email, cumpleanios); //null seria el domicilio. Ver como en esta query agregar el domicilio
 	}
 }

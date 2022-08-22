@@ -1,6 +1,6 @@
 package presentacion.vista;
 
-import javax.swing.DefaultComboBoxModel;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -22,7 +22,8 @@ public class VentanaPersona extends JFrame
 	private JSpinner spinPiso;
 	private JTextField txtDepto;
 	private JComboBox comboProv;
-	private JComboBox comboLocal;	
+	private JComboBox comboLocal;
+	private JTextField txtEmail;
 	private JButton btnAgregarPersona;
 	private static VentanaPersona INSTANCE;
 	
@@ -176,7 +177,6 @@ public class VentanaPersona extends JFrame
 	{
 		return comboLocal;
 	}
-
 
 	public JButton getBtnAgregarPersona() 
 	{

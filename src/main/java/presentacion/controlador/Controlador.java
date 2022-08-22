@@ -41,10 +41,10 @@ public class Controlador implements ActionListener
 			domicilio.setDepto(this.ventanaPersona.getTxtDepto().getText());
 			domicilio.setProvincia(this.ventanaPersona.getComboProv().getSelectedItem().toString());
 			domicilio.setLocalidad(this.ventanaPersona.getComboLocal().getSelectedItem().toString());
-						
 			String nombre = this.ventanaPersona.getTxtNombre().getText();
 			String tel = this.ventanaPersona.getTxtTelefono().getText();
-			PersonaDTO nuevaPersona = new PersonaDTO(0, nombre, tel, domicilio);
+			//agregar email, cumpleanios, etc
+			PersonaDTO nuevaPersona = new PersonaDTO(0, nombre, tel, domicilio, null, null);
 			this.agenda.agregarPersona(nuevaPersona);
 			this.refrescarTabla();
 			this.ventanaPersona.cerrar();

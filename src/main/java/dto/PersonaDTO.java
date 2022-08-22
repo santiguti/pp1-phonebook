@@ -1,18 +1,24 @@
 package dto;
 
+import java.util.Date;
+
 public class PersonaDTO 
 {
 	private int idPersona;
 	private String nombre;
 	private String telefono;
 	private Domicilio domicilio;
+	private String email;
+	private Date cumpleanios;
 
-	public PersonaDTO(int idPersona, String nombre, String telefono, Domicilio domicilio)
+	public PersonaDTO(int idPersona, String nombre, String telefono, Domicilio domicilio, String email, Date cumpleanios)
 	{
 		this.idPersona = idPersona;
 		this.nombre = nombre;
 		this.telefono = telefono;
 		this.domicilio = domicilio;
+		this.email = email;
+		this.cumpleanios = cumpleanios;
 	}
 	
 	public int getIdPersona() 
