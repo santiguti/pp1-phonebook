@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import org.apache.log4j.Logger;
 
@@ -22,7 +21,7 @@ public class Conexion
 			this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/agenda","root","root");
 			this.connection.setAutoCommit(false);
 			log.info("Conexión exitosa");
-			Statement st = connection.createStatement();
+			//Statement st = connection.createStatement();
 			String sql = "INSERT INTO personas(Nombre, Telefono) VALUES ('pepe', 333456789, 'blandengues', 78,2);";
 			//st.executeUpdate( );
 			PreparedStatement preparedStmt = connection.prepareStatement(sql);

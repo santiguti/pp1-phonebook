@@ -135,12 +135,17 @@ public class Vista
 
 		for (PersonaDTO p : personasEnTabla)
 		{
+			/*
 			String nombre = p.getNombre();
 			String tel = p.getTelefono();
 			String calle = p.getCalle();
 			String altura = p.getNumeroCalle();
 			String piso = p.getPiso();
 			Object[] fila = {nombre, tel, calle, altura, piso};
+			this.getModelPersonas().addRow(fila);*/
+			String nombre = p.getNombre();
+			String tel = p.getTelefono();
+			Object[] fila = {nombre, tel};
 			this.getModelPersonas().addRow(fila);
 		}
 		

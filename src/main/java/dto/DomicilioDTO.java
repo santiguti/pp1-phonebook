@@ -1,7 +1,8 @@
 package dto;
 
-public class Domicilio 
+public class DomicilioDTO
 {
+	private int idDomicilio;
 	private int idPersona;
 	private String calle;
 	private int altura;
@@ -10,13 +11,14 @@ public class Domicilio
 	private String provincia;
 	private String localidad;
 	
-	public Domicilio()
+	public DomicilioDTO()
 	{
 		
 	}
 	
-	public Domicilio(int idPersona, String calle, int altura, int piso, String depto, String provincia, String localidad) 
+	public DomicilioDTO(int idDomicilio, int idPersona, String calle, int altura, int piso, String depto, String provincia, String localidad) 
 	{
+		this.setIdDomicilio(idDomicilio);
 		this.setIdPersona(idPersona);
 		this.setCalle(calle);
 		this.setAltura(altura);
@@ -25,6 +27,15 @@ public class Domicilio
 		this.setProvincia(provincia);
 		this.setLocalidad(localidad);
 	}
+	
+	public int getIdDomicilio() {
+		return idDomicilio;
+	}
+
+	public void setIdDomicilio(int idDomicilio) {
+		this.idDomicilio = idDomicilio;
+	}
+
 
 	public int getIdPersona() {
 		return idPersona;
