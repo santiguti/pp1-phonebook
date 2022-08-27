@@ -4,7 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import com.itextpdf.text.log.SysoCounter;
+import java.sql.*;
+
 import modelo.Agenda;
+import persistencia.conexion.Conexion;
 import presentacion.reportes.ReporteAgenda;
 import presentacion.vista.VentanaPersona;
 import presentacion.vista.Vista;
@@ -34,17 +38,22 @@ public class Controlador implements ActionListener
 		}
 
 		private void guardarPersona(ActionEvent p) {
-			Domicilio domicilio = new Domicilio();
+			/*Domicilio domicilio = new Domicilio();
 			domicilio.setCalle(this.ventanaPersona.getTxtCalle().getText());
 			domicilio.setAltura((int) this.ventanaPersona.getSpinAltura().getValue());
 			domicilio.setPiso((int) this.ventanaPersona.getSpinPiso().getValue());
 			domicilio.setDepto(this.ventanaPersona.getTxtDepto().getText());
 			domicilio.setProvincia(this.ventanaPersona.getComboProv().getSelectedItem().toString());
-			domicilio.setLocalidad(this.ventanaPersona.getComboLocal().getSelectedItem().toString());
+			domicilio.setLocalidad(this.ventanaPersona.getComboLocal().getSelectedItem().toString());*/
 			String nombre = this.ventanaPersona.getTxtNombre().getText();
 			String tel = this.ventanaPersona.getTxtTelefono().getText();
+			String calle = this.ventanaPersona.getTxtCalle().getText();
+			
+			String numeroCalle = this.ventanaPersona.getTxtAltura().getText();
+			String piso = this.ventanaPersona.getTxtPiso().getText();
+			
 			//agregar email, cumpleanios, etc
-			PersonaDTO nuevaPersona = new PersonaDTO(0, nombre, tel, domicilio, null, null);
+			PersonaDTO nuevaPersona = new PersonaDTO(0, nombre, tel, null, null, null, calle, numeroCalle, piso);
 			this.agenda.agregarPersona(nuevaPersona);
 			this.refrescarTabla();
 			this.ventanaPersona.cerrar();
@@ -76,6 +85,9 @@ public class Controlador implements ActionListener
 		{
 			this.personasEnTabla = agenda.obtenerPersonas();
 			this.vista.llenarTabla(this.personasEnTabla);
+			//prueba elias
+			System.out.println(personasEnTabla.get(0).getNombre());
+			
 		}
 
 		@Override

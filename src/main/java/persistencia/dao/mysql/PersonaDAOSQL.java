@@ -13,7 +13,8 @@ import dto.PersonaDTO;
 
 public class PersonaDAOSQL implements PersonaDAO
 {
-	private static final String insert = "INSERT INTO personas(idPersona, nombre, telefono) VALUES(?, ?, ?)";
+	//cada vez que hay un campo nuevo hay que colocarlo en el statement
+	private static final String insert = "INSERT INTO personas(idPersona, nombre, telefono, calle, altura, piso) VALUES(?, ?, ?, ?, ?, ?)";
 	private static final String delete = "DELETE FROM personas WHERE idPersona = ?";
 	private static final String readall = "SELECT * FROM personas";
 		
@@ -28,6 +29,10 @@ public class PersonaDAOSQL implements PersonaDAO
 			statement.setInt(1, persona.getIdPersona());
 			statement.setString(2, persona.getNombre());
 			statement.setString(3, persona.getTelefono());
+			statement.setString(4, persona.getCalle());
+			statement.setString(5,  persona.getNumeroCalle());
+			statement.setString(6, persona.getPiso());
+			//statement.setObject(4, persona.getDomicilio());/////
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -96,9 +101,13 @@ public class PersonaDAOSQL implements PersonaDAO
 		int id = resultSet.getInt("idPersona");
 		String nombre = resultSet.getString("Nombre");
 		String tel = resultSet.getString("Telefono");
+		//agrega elias
+		String calle = resultSet.getString("Calle");
+		String numeroCalle = resultSet.getString("Altura");
+		String piso = resultSet.getString("Piso");
 		//domicilio??
 		String email = resultSet.getString("Email");
 		Date cumpleanios = resultSet.getDate("Cumpleanios");
-		return new PersonaDTO(id, nombre, tel, null, email, cumpleanios); //null seria el domicilio. Ver como en esta query agregar el domicilio
+		return new PersonaDTO(id, nombre, tel, null, null, null,calle,numeroCalle,piso); //null seria el domicilio. Ver como en esta query agregar el domicilio
 	}
 }

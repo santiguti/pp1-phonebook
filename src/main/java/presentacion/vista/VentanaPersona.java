@@ -18,8 +18,10 @@ public class VentanaPersona extends JFrame
 	private JTextField txtNombre;
 	private JTextField txtTelefono;
 	private JTextField txtCalle;
-	private JSpinner spinAltura;
-	private JSpinner spinPiso;
+	private JTextField txtNumeroCalle; //agrego elias es la altura
+	private JTextField txtPiso; //agrego elias es el piso
+	private JTextField spinAltura;
+	private JTextField spinPiso;
 	private JTextField txtDepto;
 	private JComboBox comboProv;
 	private JComboBox comboLocal;
@@ -105,11 +107,11 @@ public class VentanaPersona extends JFrame
 		panel.add(txtCalle);
 		txtCalle.setColumns(10);
 		
-		spinAltura = new JSpinner();
+		spinAltura = new JTextField();
 		spinAltura.setBounds(133, 131, 164, 20);
 		panel.add(spinAltura);
 		
-		spinPiso = new JSpinner();
+		spinPiso = new JTextField();
 		spinPiso.setBounds(133, 172, 164, 20);
 		panel.add(spinPiso);
 		
@@ -153,12 +155,25 @@ public class VentanaPersona extends JFrame
 		return txtCalle;
 	}
 	
-	public JSpinner getSpinAltura() 
+	//creo que es mejor que todos los int sean string para ahorrarse parseos
+	
+	public JTextField getTxtAltura() {
+		return spinAltura;/////////
+	}
+	
+	public JTextField getTxtPiso(){
+		
+		return spinPiso;
+	}
+	
+	///////
+	
+	public JTextField getSpinAltura() 
 	{
 		return spinAltura;
 	}
 	
-	public JSpinner getSpinPiso() 
+	public JTextField getSpinPiso() 
 	{
 		return spinPiso;
 	}
@@ -187,6 +202,12 @@ public class VentanaPersona extends JFrame
 	{
 		this.txtNombre.setText(null);
 		this.txtTelefono.setText(null);
+		
+		this.spinAltura.setText(null);
+		this.spinPiso.setText(null);
+		
+	
+		
 		this.dispose();
 	}
 	
