@@ -24,6 +24,7 @@ public class Agenda
 	{
 		this.persona.insert(nuevaPersona);
 	}
+	
 
 	public void borrarPersona(PersonaDTO persona_a_eliminar) 
 	{

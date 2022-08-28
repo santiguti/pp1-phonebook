@@ -3,14 +3,16 @@ package dto;
 
 public class PersonaDTO {
 	private int idPersona;
+	private int idDomicilio;
 	private String nombre;
 	private String telefono;
 	private String email;
 	//private Date cumpleanios;
 
 
-	public PersonaDTO(int idPersona, String nombre, String telefono, String email) {
+	public PersonaDTO(int idPersona, int idDomicilio, String nombre, String telefono, String email) {
 		this.idPersona = idPersona;
+		this.idDomicilio = idDomicilio;
 		this.nombre = nombre;
 		this.telefono = telefono;
 		this.email = email;
@@ -25,6 +27,15 @@ public class PersonaDTO {
 	public void setIdPersona(int idPersona) {
 		this.idPersona = idPersona;
 	}
+	
+	public int getIdDomicilio() {
+		return idDomicilio;
+	}
+
+	public void setIdDomicilio(int idDomicilio) {
+		this.idDomicilio = idDomicilio;
+	}
+
 
 	public String getNombre() {
 		return this.nombre;
@@ -49,6 +60,5 @@ public class PersonaDTO {
 	public String setEmail(String email) {
 		return this.email = email;
 	}
-
 
 }

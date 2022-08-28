@@ -13,7 +13,7 @@ import dto.DomicilioDTO;
 public class DomicilioDAOSQL implements DomicilioDAO
 {
 	//cada vez que hay un campo nuevo hay que colocarlo en el statement
-	private static final String insert = "INSERT INTO domicilios(idDomicilio, idPersona, Calle, Altura, Piso, Depto, Provincia, Localidad) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String insert = "INSERT INTO domicilios(idDomicilio, Calle, Altura, Piso, Depto, Provincia, Localidad) VALUES(?, ?, ?, ?, ?, ?, ?)";
 	private static final String delete = "DELETE FROM domicilios WHERE idDomicilio = ?";
 	private static final String readall = "SELECT * FROM domicilios";
 		
@@ -26,13 +26,12 @@ public class DomicilioDAOSQL implements DomicilioDAO
 		{
 			statement = conexion.prepareStatement(insert);
 			statement.setInt(1, domicilio.getIdDomicilio());
-			statement.setInt(2, domicilio.getIdPersona());
-			statement.setString(3, domicilio.getCalle());
-			statement.setInt(4, domicilio.getAltura());
-			statement.setInt(5, domicilio.getPiso());
-			statement.setString(6, domicilio.getDepto());
-			statement.setString(7, domicilio.getProvincia());
-			statement.setString(8, domicilio.getLocalidad());
+			statement.setString(2, domicilio.getCalle());
+			statement.setInt(3, domicilio.getAltura());
+			statement.setInt(4, domicilio.getPiso());
+			statement.setString(5, domicilio.getDepto());
+			statement.setString(6, domicilio.getProvincia());
+			statement.setString(7, domicilio.getLocalidad());
 			
 			if(statement.executeUpdate() > 0)
 			{
@@ -100,13 +99,12 @@ public class DomicilioDAOSQL implements DomicilioDAO
 	private DomicilioDTO getDomicilioDTO(ResultSet resultSet) throws SQLException
 	{
 		int idDomicilio = resultSet.getInt("idDomicilio");
-		int idPersona = resultSet.getInt("idPersona");
 		String calle = resultSet.getString("Calle");
 		int altura = resultSet.getInt("Altura");
 		int piso = resultSet.getInt("Piso");
 		String depto = resultSet.getString("Depto");
 		String provincia = resultSet.getString("Provincia");
 		String localidad = resultSet.getString("Localidad");
-		return new DomicilioDTO(idDomicilio, idPersona, calle, altura, piso, depto, provincia, localidad);
+		return new DomicilioDTO(idDomicilio, calle, altura, piso, depto, provincia, localidad);
 	}
 }

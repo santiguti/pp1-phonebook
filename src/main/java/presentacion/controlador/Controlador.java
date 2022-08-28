@@ -39,15 +39,17 @@ public class Controlador implements ActionListener {
 		String depto = this.ventanaPersona.getTxtDepto().getText();
 		String provincia = this.ventanaPersona.getComboProv().getSelectedItem().toString();
 		String localidad = this.ventanaPersona.getComboLocal().getSelectedItem().toString();
-		DomicilioDTO nuevoDomicilio = new DomicilioDTO(0, 0, calle, altura, piso, depto, provincia, localidad);
+		DomicilioDTO nuevoDomicilio = new DomicilioDTO(0, calle, altura, piso, depto, provincia, localidad);
+		this.agenda.agregarDomicilio(nuevoDomicilio);
+		//Guardo todos los domicilios para poder tomar el ultimo domicilio creado DESDE mysql
+		//para poder tomar el id automatico que se le asignó a ese domicilio
+		List<DomicilioDTO> domicilios = agenda.obtenerDomicilios();
 
 		String nombre = this.ventanaPersona.getTxtNombre().getText();
 		String tel = this.ventanaPersona.getTxtTelefono().getText();
 		String email = this.ventanaPersona.getTxtEmail().getText();
-		PersonaDTO nuevaPersona = new PersonaDTO(0, nombre, tel, email);
-
+		PersonaDTO nuevaPersona = new PersonaDTO(0, domicilios.get(domicilios.size()-1).getIdDomicilio(), nombre, tel, email);
 		this.agenda.agregarPersona(nuevaPersona);
-		this.agenda.agregarDomicilio(nuevoDomicilio);
 		this.refrescarTabla();
 		this.ventanaPersona.cerrar();
 	}
@@ -74,7 +76,8 @@ public class Controlador implements ActionListener {
 
 	private void refrescarTabla() {
 		this.personasEnTabla = agenda.obtenerPersonas();
-		this.vista.llenarTabla(this.personasEnTabla);
+		this.domiciliosEnTabla = agenda.obtenerDomicilios();
+		this.vista.llenarTabla(this.personasEnTabla, this.domiciliosEnTabla);
 		// prueba elias
 		//System.out.println(personasEnTabla.get(0).getNombre());
 
