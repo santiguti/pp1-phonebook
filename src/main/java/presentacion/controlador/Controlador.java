@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import modelo.Agenda;
 import presentacion.reportes.ReporteAgenda;
+import presentacion.vista.VentanaEditar;
 import presentacion.vista.VentanaPersona;
 import presentacion.vista.Vista;
 import dto.DomicilioDTO;
@@ -15,20 +16,28 @@ public class Controlador implements ActionListener {
 	private List<PersonaDTO> personasEnTabla;
 	private List<DomicilioDTO> domiciliosEnTabla;
 	private VentanaPersona ventanaPersona;
+	private VentanaEditar ventanaEditar;
 	private Agenda agenda;
 
 	public Controlador(Vista vista, Agenda agenda) {
 		this.vista = vista;
 		this.vista.getBtnAgregar().addActionListener(a -> ventanaAgregarPersona(a));
+		this.vista.getBtnEditar().addActionListener(k -> ventanaEditarPersona(k));
 		this.vista.getBtnBorrar().addActionListener(s -> borrarPersona(s));
 		this.vista.getBtnReporte().addActionListener(r -> mostrarReporte(r));
 		this.ventanaPersona = VentanaPersona.getInstance();
+		this.ventanaEditar = VentanaEditar.getInstance();
 		this.ventanaPersona.getBtnAgregarPersona().addActionListener(p -> guardarPersona(p));
+		this.ventanaEditar.getBtnEditarPersona().addActionListener(b -> editarPersona(b));
 		this.agenda = agenda;
 	}
 
 	private void ventanaAgregarPersona(ActionEvent a) {
 		this.ventanaPersona.mostrarVentana();
+	}
+	
+	private void ventanaEditarPersona(ActionEvent k) {
+		this.ventanaEditar.mostrarVentana();
 	}
 
 	private void guardarPersona(ActionEvent p) {
@@ -37,9 +46,10 @@ public class Controlador implements ActionListener {
 		int altura = ((int) this.ventanaPersona.getSpinAltura().getValue());
 		int piso = ((int) this.ventanaPersona.getSpinPiso().getValue());
 		String depto = this.ventanaPersona.getTxtDepto().getText();
+		String pais = this.ventanaPersona.getComboPais().getSelectedItem().toString();
 		String provincia = this.ventanaPersona.getComboProv().getSelectedItem().toString();
 		String localidad = this.ventanaPersona.getComboLocal().getSelectedItem().toString();
-		DomicilioDTO nuevoDomicilio = new DomicilioDTO(0, calle, altura, piso, depto, provincia, localidad);
+		DomicilioDTO nuevoDomicilio = new DomicilioDTO(0, calle, altura, piso, depto, pais, provincia, localidad);
 		this.agenda.agregarDomicilio(nuevoDomicilio);
 		//Guardo todos los domicilios para poder tomar el ultimo domicilio creado DESDE mysql
 		//para poder tomar el id automatico que se le asignó a ese domicilio
@@ -52,6 +62,10 @@ public class Controlador implements ActionListener {
 		this.agenda.agregarPersona(nuevaPersona);
 		this.refrescarTabla();
 		this.ventanaPersona.cerrar();
+	}
+	
+	private void editarPersona(ActionEvent b) {
+		
 	}
 
 	private void mostrarReporte(ActionEvent r) {

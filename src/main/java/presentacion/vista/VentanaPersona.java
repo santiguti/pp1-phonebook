@@ -1,5 +1,9 @@
 package presentacion.vista;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -10,19 +14,21 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import dto.DomicilioHelper;
 
-public class VentanaPersona extends JFrame {
+public class VentanaPersona extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtNombre;
 	private JTextField txtTelefono;
+	private JTextField txtEmail;
 	private JTextField txtCalle;
 	private JSpinner spinAltura;
 	private JSpinner spinPiso;
 	private JTextField txtDepto;
+	private JComboBox comboPais;
 	private JComboBox comboProv;
 	private JComboBox comboLocal;
-	private JTextField txtEmail;
 	private JButton btnAgregarPersona;
+	private DomicilioHelper dmhelp = new DomicilioHelper();
 	private static VentanaPersona INSTANCE;
 
 	public static VentanaPersona getInstance() {
@@ -35,9 +41,7 @@ public class VentanaPersona extends JFrame {
 
 	private VentanaPersona() {
 		super();
-		DomicilioHelper dmhelp = new DomicilioHelper();
-		dmhelp.parseLocalidades();
-		dmhelp.parseProvincias();
+		
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 343, 183);
@@ -79,12 +83,16 @@ public class VentanaPersona extends JFrame {
 		lblDepto.setBounds(10, 257, 113, 14);
 		panel.add(lblDepto);
 
-		JLabel lblProvincia = new JLabel("Provincia");
-		lblProvincia.setBounds(10, 298, 113, 14);
-		panel.add(lblProvincia);
+		JLabel lblPais = new JLabel("Pais");
+		lblPais.setBounds(10, 298, 113, 14);
+		panel.add(lblPais);
 
+		JLabel lblProvincia = new JLabel("Provincia");
+		lblProvincia.setBounds(10, 339, 113, 14);
+		panel.add(lblProvincia);
+		
 		JLabel lblLocalidad = new JLabel("Localidad");
-		lblLocalidad.setBounds(10, 339, 113, 14);
+		lblLocalidad.setBounds(10, 380, 113, 14);
 		panel.add(lblLocalidad);
 
 		txtNombre = new JTextField();
@@ -119,21 +127,28 @@ public class VentanaPersona extends JFrame {
 		txtDepto.setBounds(133, 254, 164, 20);
 		panel.add(txtDepto);
 		txtDepto.setColumns(10);
+		
+		comboPais = new JComboBox(dmhelp.getCountries());
+		comboPais.setBounds(133, 295, 164, 20);
+		panel.add(comboPais);
+		comboPais.addActionListener(a -> countryChosen(a));
 
-		comboProv = new JComboBox(dmhelp.getProvinciasArray());
-		comboProv.setBounds(133, 295, 164, 20);
+		comboProv = new JComboBox();
+		comboProv.setBounds(133, 339, 164, 20);
 		panel.add(comboProv);
+		comboProv.addActionListener(b -> stateChosen(b));
 
-		comboLocal = new JComboBox(dmhelp.getLocalidadesArray());
-		comboLocal.setBounds(133, 339, 164, 20);
+		comboLocal = new JComboBox();
+		comboLocal.setBounds(133, 383, 164, 20);
 		panel.add(comboLocal);
 
 		btnAgregarPersona = new JButton("Agregar");
-		btnAgregarPersona.setBounds(208, 383, 89, 23);
+		btnAgregarPersona.setBounds(208, 424, 89, 23);
 		panel.add(btnAgregarPersona);
 
 		this.setVisible(false);
 	}
+	
 
 	public void mostrarVentana() {
 		this.setVisible(true);
@@ -166,6 +181,11 @@ public class VentanaPersona extends JFrame {
 	public JTextField getTxtDepto() {
 		return txtDepto;
 	}
+	
+	public JComboBox getComboPais() {
+		return comboPais;
+	}
+
 
 	public JComboBox getComboProv() {
 		return comboProv;
@@ -182,11 +202,37 @@ public class VentanaPersona extends JFrame {
 	public void cerrar() {
 		this.txtNombre.setText(null);
 		this.txtTelefono.setText(null);
-
-		// this.spinAltura.setText(null);
-		// this.spinPiso.setText(null);
+		this.txtEmail.setText(null);
+		this.spinAltura.setValue(null);
+		this.spinPiso.setValue(null);
 
 		this.dispose();
 	}
+	
+	public void countryChosen(ActionEvent a) {
+		String comboPaisValue = (String)comboPais.getSelectedItem().toString();
+        
+		if (!comboPaisValue.equals("Select an option")) {
+			comboProv.setModel(new DefaultComboBoxModel<String>(dmhelp.getStatesOf(comboPaisValue)));
+		}
+				
+	}
+	
+	public void stateChosen(ActionEvent b) {
+		String comboPaisValue = (String)comboPais.getSelectedItem().toString();
+		String comboProvValue = (String)comboProv.getSelectedItem().toString();
+        		
+		if (!comboPaisValue.equals("Select an option") && !comboProvValue.equals("Select an option")) {
+			comboLocal.setModel(new DefaultComboBoxModel<String>(dmhelp.getCitiesOf(comboPaisValue, comboProvValue)));
+		}
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 
 }

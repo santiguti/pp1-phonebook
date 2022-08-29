@@ -9,6 +9,7 @@ CREATE TABLE domicilios
   Altura int(15),
   Piso int(5),
   Depto varchar(4),
+  Pais varchar(50),
   Provincia varchar(24),
   Localidad varchar(45),
   PRIMARY KEY (idDomicilio)
