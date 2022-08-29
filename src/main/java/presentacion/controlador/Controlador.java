@@ -20,6 +20,7 @@ public class Controlador implements ActionListener {
 	private VentanaPersona ventanaPersona;
 	private VentanaEditar ventanaEditar;
 	private Agenda agenda;
+	private int filaSeleccionadaAEditar;
 
 	public Controlador(Vista vista, Agenda agenda) {
 		this.vista = vista;
@@ -37,9 +38,19 @@ public class Controlador implements ActionListener {
 	private void ventanaAgregarPersona(ActionEvent a) {
 		this.ventanaPersona.mostrarVentana();
 	}
-	
+
 	private void ventanaEditarPersona(ActionEvent k) {
-		this.ventanaEditar.mostrarVentana();
+		filaSeleccionadaAEditar = this.vista.getTablaPersonas().getSelectedRow();
+		if (filaSeleccionadaAEditar != -1) {
+			this.ventanaEditar.mostrarVentana();
+			List<PersonaDTO> personas = agenda.obtenerPersonas();
+			this.ventanaEditar.setTxtNombre(personas.get(filaSeleccionadaAEditar).getNombre());
+			this.ventanaEditar.setTxtTelefono(personas.get(filaSeleccionadaAEditar).getTelefono());
+			this.ventanaEditar.setTxtEmail(personas.get(filaSeleccionadaAEditar).getEmail());
+			this.ventanaEditar.setDiaCumple(personas.get(filaSeleccionadaAEditar).getCumpleanios().getDay());
+			this.ventanaEditar.setMesCumple(personas.get(filaSeleccionadaAEditar).getCumpleanios().getMonth()+1);
+			this.ventanaEditar.setAnioCumple(personas.get(filaSeleccionadaAEditar).getCumpleanios().getYear()+1900);
+		}
 	}
 
 	private void guardarPersona(ActionEvent p) {
@@ -53,32 +64,47 @@ public class Controlador implements ActionListener {
 		String localidad = this.ventanaPersona.getComboLocal();
 		DomicilioDTO nuevoDomicilio = new DomicilioDTO(0, calle, altura, piso, depto, pais, provincia, localidad);
 		this.agenda.agregarDomicilio(nuevoDomicilio);
-		
-		//Guardo todos los domicilios para poder tomar el ultimo domicilio creado DESDE mysql
-		//para poder tomar el id automatico que se le asignó a ese domicilio
+
+		// Guardo todos los domicilios para poder tomar el ultimo domicilio creado DESDE
+		// mysql
+		// para poder tomar el id automatico que se le asignó a ese domicilio
 		List<DomicilioDTO> domicilios = agenda.obtenerDomicilios();
-		int domicilioId = domicilios.get(domicilios.size()-1).getIdDomicilio();
+		int domicilioId = domicilios.get(domicilios.size() - 1).getIdDomicilio();
 
 		String nombre = this.ventanaPersona.getTxtNombre().getText();
 		String tel = this.ventanaPersona.getTxtTelefono().getText();
 		String email = this.ventanaPersona.getTxtEmail().getText();
 		Calendar cal = Calendar.getInstance();
-		cal.set( Calendar.YEAR, this.ventanaPersona.getAnioCumple() );
-		cal.set( Calendar.MONTH, this.ventanaPersona.getMesCumple()-1  );
-		cal.set( Calendar.DATE, this.ventanaPersona.getDiaCumple()  );
-		Date cumpleanios = new Date( cal.getTimeInMillis() );
-		System.out.println("anio de ventanaPErsona " + this.ventanaPersona.getAnioCumple());
-		System.out.println("mes de ventanaPErsona " + this.ventanaPersona.getMesCumple());
-		System.out.println("dia de ventanaPErsona " + this.ventanaPersona.getDiaCumple());
-		System.out.println("cumpleanios creado en controlado " + cumpleanios);
+		cal.set(Calendar.YEAR, this.ventanaPersona.getAnioCumple());
+		cal.set(Calendar.MONTH, this.ventanaPersona.getMesCumple()-1);
+		cal.set(Calendar.DATE, this.ventanaPersona.getDiaCumple());
+		Date cumpleanios = new Date(cal.getTimeInMillis());
 		PersonaDTO nuevaPersona = new PersonaDTO(0, domicilioId, nombre, tel, email, cumpleanios);
 		this.agenda.agregarPersona(nuevaPersona);
 		this.refrescarTabla();
 		this.ventanaPersona.cerrar();
 	}
-	
+
 	private void editarPersona(ActionEvent b) {
+		List<PersonaDTO> personas = agenda.obtenerPersonas();
+		int personaId = personas.get(filaSeleccionadaAEditar).getIdPersona();
+		int domicilioId = personas.get(filaSeleccionadaAEditar).getIdDomicilio();
 		
+		
+		String nombre = this.ventanaEditar.getTxtNombre().getText();
+		String tel = this.ventanaEditar.getTxtTelefono().getText();
+		String email = this.ventanaEditar.getTxtEmail().getText();
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.YEAR, this.ventanaEditar.getAnioCumple());
+		cal.set(Calendar.MONTH, this.ventanaEditar.getMesCumple());
+		cal.set(Calendar.DATE, this.ventanaEditar.getDiaCumple());
+		Date cumpleanios = new Date(cal.getTimeInMillis());
+		PersonaDTO nuevaPersona = new PersonaDTO(personaId, domicilioId, nombre, tel, email, cumpleanios);
+		
+		this.agenda.borrarPersona(personas.get(filaSeleccionadaAEditar));
+		this.agenda.agregarPersona(nuevaPersona);
+		this.refrescarTabla();
+		this.ventanaEditar.cerrar();
 	}
 
 	private void mostrarReporte(ActionEvent r) {

@@ -28,3 +28,6 @@ CREATE TABLE personas
 
 USE agenda; 
 select * from personas, domicilios;
+SELECT personas.nombre, personas.telefono, domicilios.pais, domicilios.provincia, domicilios.localidad
+FROM personas
+INNER JOIN domicilios ON domicilios.idDomicilio=personas.idDomicilio;
