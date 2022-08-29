@@ -22,12 +22,13 @@ CREATE TABLE personas
   Telefono varchar(20) NOT NULL,
   Email varchar(45),
   Cumpleanios date,
+  Etiqueta varchar(10),
   PRIMARY KEY (idPersona),
   FOREIGN KEY (idDomicilio) REFERENCES domicilios(idDomicilio)
 );
 
 USE agenda; 
-select * from personas, domicilios;
+select * from personas;
 SELECT personas.nombre, personas.telefono, domicilios.pais, domicilios.provincia, domicilios.localidad
 FROM personas
 INNER JOIN domicilios ON domicilios.idDomicilio=personas.idDomicilio;

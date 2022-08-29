@@ -25,6 +25,7 @@ public class VentanaEditar extends JFrame implements ActionListener{
 	private JSpinner spinDiaCumple;
 	private JSpinner spinMesCumple;
 	private JSpinner spinAnioCumple;
+	private JComboBox comboEtiqueta;
 	private JTextField txtCalle;
 	private JSpinner spinAltura;
 	private JSpinner spinPiso;
@@ -56,7 +57,7 @@ public class VentanaEditar extends JFrame implements ActionListener{
 		contentPane.setLayout(null);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 11, 307, 600);
+		panel.setBounds(10, 11, 307, 650);
 		contentPane.add(panel);
 		panel.setLayout(null);
 
@@ -83,33 +84,37 @@ public class VentanaEditar extends JFrame implements ActionListener{
 		JLabel lblAnioCumple = new JLabel("Anio Nacimiento");
 		lblAnioCumple.setBounds(10, 216, 113, 14);
 		panel.add(lblAnioCumple);
+		
+		JLabel lblEtiqueta = new JLabel("Etiqueta");
+		lblAnioCumple.setBounds(10, 257, 113, 14);
+		panel.add(lblAnioCumple);
 
 		JLabel lblCalle = new JLabel("Calle");
-		lblCalle.setBounds(10, 257, 113, 14);
+		lblCalle.setBounds(10, 298, 113, 14);
 		panel.add(lblCalle);
 
 		JLabel lblAltura = new JLabel("Altura");
-		lblAltura.setBounds(10, 298, 113, 14);
+		lblAltura.setBounds(10, 339, 113, 14);
 		panel.add(lblAltura);
 
 		JLabel lblPiso = new JLabel("Piso");
-		lblPiso.setBounds(10, 339, 113, 14);
+		lblPiso.setBounds(10, 380, 113, 14);
 		panel.add(lblPiso);
 
 		JLabel lblDepto = new JLabel("Depto");
-		lblDepto.setBounds(10, 380, 113, 14);
+		lblDepto.setBounds(10, 421, 113, 14);
 		panel.add(lblDepto);
 
 		JLabel lblPais = new JLabel("Pais");
-		lblPais.setBounds(10, 421, 113, 14);
+		lblPais.setBounds(10, 462, 113, 14);
 		panel.add(lblPais);
 
 		JLabel lblProvincia = new JLabel("Provincia");
-		lblProvincia.setBounds(10, 462, 113, 14);
+		lblProvincia.setBounds(10, 503, 113, 14);
 		panel.add(lblProvincia);
 		
 		JLabel lblLocalidad = new JLabel("Localidad");
-		lblLocalidad.setBounds(10, 503, 113, 14);
+		lblLocalidad.setBounds(10, 544, 113, 14);
 		panel.add(lblLocalidad);
 
 		txtNombre = new JTextField();
@@ -141,41 +146,46 @@ public class VentanaEditar extends JFrame implements ActionListener{
 		spinAnioCumple = new JSpinner(spinAnioModel);
 		spinAnioCumple.setBounds(133, 213, 164, 20);
 		panel.add(spinAnioCumple);
+		
+		String[] etiquetas = new String[] {"Friends", "Family", "Work", "Others"};
+		comboEtiqueta = new JComboBox(etiquetas);
+		comboEtiqueta.setBounds(133, 254, 164, 20);
+		panel.add(comboEtiqueta);
 
 		txtCalle = new JTextField();
-		txtCalle.setBounds(133, 254, 164, 20);
+		txtCalle.setBounds(133, 295, 164, 20);
 		panel.add(txtCalle);
 		txtCalle.setColumns(10);
 
 		spinAltura = new JSpinner();
-		spinAltura.setBounds(133, 295, 164, 20);
+		spinAltura.setBounds(133, 336, 164, 20);
 		panel.add(spinAltura);
 
 		spinPiso = new JSpinner();
-		spinPiso.setBounds(133, 336, 164, 20);
+		spinPiso.setBounds(133, 377, 164, 20);
 		panel.add(spinPiso);
 
 		txtDepto = new JTextField();
-		txtDepto.setBounds(133, 377, 164, 20);
+		txtDepto.setBounds(133, 418, 164, 20);
 		panel.add(txtDepto);
 		txtDepto.setColumns(10);
 		
 		comboPais = new JComboBox(dmhelp.getCountries());
-		comboPais.setBounds(133, 418, 164, 20);
+		comboPais.setBounds(133, 459, 164, 20);
 		panel.add(comboPais);
 		comboPais.addActionListener(a -> countryChosen(a));
 
 		comboProv = new JComboBox();
-		comboProv.setBounds(133, 459, 164, 20);
+		comboProv.setBounds(133, 500, 164, 20);
 		panel.add(comboProv);
 		comboProv.addActionListener(b -> stateChosen(b));
 
 		comboLocal = new JComboBox();
-		comboLocal.setBounds(133, 500, 164, 20);
+		comboLocal.setBounds(133, 541, 164, 20);
 		panel.add(comboLocal);
 
-		btnEditarPersona = new JButton("Agregar");
-		btnEditarPersona.setBounds(208, 541, 89, 23);
+		btnEditarPersona = new JButton("Editar");
+		btnEditarPersona.setBounds(208, 582, 89, 23);
 		panel.add(btnEditarPersona);
 
 		this.setVisible(false);
@@ -232,6 +242,10 @@ public class VentanaEditar extends JFrame implements ActionListener{
 	
 	public void setAnioCumple(int anio) {
 		this.spinAnioCumple.setValue(anio);
+	}
+	
+	public String getComboEtiqueta() {
+		return comboEtiqueta.getSelectedItem().toString();
 	}
 
 	public JTextField getTxtCalle() {
