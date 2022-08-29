@@ -19,10 +19,7 @@ public class Main
 	/*
 	ToDo:
 	- Agregar las diferentes columnas al ReporteAgenda. Esto se hace modificando reportes/ReporteAgenda.jrxml (ver lo que mandaron por telegram)
-	- Agregar cumpleaños a persona, lo manejamos como Date? Tiene Date MYSQL? O hacemos Date, pasarlo a string para guardarlo en mysql?
 	- EDITAR CONTACTO
-	
-	- Que hace falta para entrega 3? Fijarse y agregarlo
 	- Hacer documentación de todo y entregar
 	*/
 }

@@ -1,10 +1,12 @@
 package persistencia.dao.mysql;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import persistencia.conexion.Conexion;
 import persistencia.dao.interfaz.PersonaDAO;
@@ -12,7 +14,7 @@ import dto.PersonaDTO;
 
 public class PersonaDAOSQL implements PersonaDAO {
 	// cada vez que hay un campo nuevo hay que colocarlo en el statement
-	private static final String insert = "INSERT INTO personas(idPersona, idDomicilio, Nombre, Telefono, Email) VALUES(?, ?, ?, ?, ?)";
+	private static final String insert = "INSERT INTO personas(idPersona, idDomicilio, Nombre, Telefono, Email, Cumpleanios) VALUES(?, ?, ?, ?, ?, ?)";
 	private static final String delete = "DELETE FROM personas WHERE idPersona = ?";
 	private static final String readall = "SELECT * FROM personas";
 
@@ -27,6 +29,15 @@ public class PersonaDAOSQL implements PersonaDAO {
 			statement.setString(3, persona.getNombre());
 			statement.setString(4, persona.getTelefono());
 			statement.setString(5, persona.getEmail());
+
+			Calendar cal = Calendar.getInstance();
+			cal.set(Calendar.YEAR, persona.getCumpleanios().getYear() + 1900);
+			cal.set(Calendar.MONTH, persona.getCumpleanios().getMonth());
+			cal.set(Calendar.DATE, persona.getCumpleanios().getDay());
+			java.sql.Date sqlDate = new java.sql.Date(cal.getTimeInMillis());
+			System.out.println("SQL DATE: " + sqlDate);
+			System.out.println("GETYEAR PERSONA" + persona.getCumpleanios().getYear() + 1900);
+			statement.setDate(6, sqlDate);
 			if (statement.executeUpdate() > 0) {
 				conexion.commit();
 				isInsertExitoso = true;
@@ -83,7 +94,7 @@ public class PersonaDAOSQL implements PersonaDAO {
 		String nombre = resultSet.getString("Nombre");
 		String tel = resultSet.getString("Telefono");
 		String email = resultSet.getString("Email");
-		// Date cumpleanios = resultSet.getDate("Cumpleanios");
-		return new PersonaDTO(idPersona, idDomicilio, nombre, tel, email);
+		Date cumpleanios = resultSet.getDate("Cumpleanios");
+		return new PersonaDTO(idPersona, idDomicilio, nombre, tel, email, cumpleanios);
 	}
 }

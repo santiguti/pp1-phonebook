@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.border.EmptyBorder;
 import dto.DomicilioHelper;
 
@@ -20,6 +22,9 @@ public class VentanaPersona extends JFrame implements ActionListener{
 	private JTextField txtNombre;
 	private JTextField txtTelefono;
 	private JTextField txtEmail;
+	private JSpinner spinDiaCumple;
+	private JSpinner spinMesCumple;
+	private JSpinner spinAnioCumple;
 	private JTextField txtCalle;
 	private JSpinner spinAltura;
 	private JSpinner spinPiso;
@@ -51,7 +56,7 @@ public class VentanaPersona extends JFrame implements ActionListener{
 		contentPane.setLayout(null);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 11, 307, 500);
+		panel.setBounds(10, 11, 307, 600);
 		contentPane.add(panel);
 		panel.setLayout(null);
 
@@ -66,33 +71,45 @@ public class VentanaPersona extends JFrame implements ActionListener{
 		JLabel lblEmail = new JLabel("Email");
 		lblEmail.setBounds(10, 93, 113, 14);
 		panel.add(lblEmail);
+		
+		JLabel lblDiaCumple = new JLabel("Dia nacimiento");
+		lblDiaCumple.setBounds(10, 134, 113, 14);
+		panel.add(lblDiaCumple);
+		
+		JLabel lblMesCumple = new JLabel("Mes Nacimiento");
+		lblMesCumple.setBounds(10, 175, 113, 14);
+		panel.add(lblMesCumple);
+		
+		JLabel lblAnioCumple = new JLabel("Anio Nacimiento");
+		lblAnioCumple.setBounds(10, 216, 113, 14);
+		panel.add(lblAnioCumple);
 
 		JLabel lblCalle = new JLabel("Calle");
-		lblCalle.setBounds(10, 134, 113, 14);
+		lblCalle.setBounds(10, 257, 113, 14);
 		panel.add(lblCalle);
 
 		JLabel lblAltura = new JLabel("Altura");
-		lblAltura.setBounds(10, 175, 113, 14);
+		lblAltura.setBounds(10, 298, 113, 14);
 		panel.add(lblAltura);
 
 		JLabel lblPiso = new JLabel("Piso");
-		lblPiso.setBounds(10, 216, 113, 14);
+		lblPiso.setBounds(10, 339, 113, 14);
 		panel.add(lblPiso);
 
 		JLabel lblDepto = new JLabel("Depto");
-		lblDepto.setBounds(10, 257, 113, 14);
+		lblDepto.setBounds(10, 380, 113, 14);
 		panel.add(lblDepto);
 
 		JLabel lblPais = new JLabel("Pais");
-		lblPais.setBounds(10, 298, 113, 14);
+		lblPais.setBounds(10, 421, 113, 14);
 		panel.add(lblPais);
 
 		JLabel lblProvincia = new JLabel("Provincia");
-		lblProvincia.setBounds(10, 339, 113, 14);
+		lblProvincia.setBounds(10, 462, 113, 14);
 		panel.add(lblProvincia);
 		
 		JLabel lblLocalidad = new JLabel("Localidad");
-		lblLocalidad.setBounds(10, 380, 113, 14);
+		lblLocalidad.setBounds(10, 503, 113, 14);
 		panel.add(lblLocalidad);
 
 		txtNombre = new JTextField();
@@ -109,41 +126,56 @@ public class VentanaPersona extends JFrame implements ActionListener{
 		txtEmail.setBounds(133, 90, 164, 20);
 		panel.add(txtEmail);
 		txtEmail.setColumns(10);
+		
+		SpinnerModel spinDiaModel = new SpinnerNumberModel(1, 1, 31, 1);
+		spinDiaCumple = new JSpinner(spinDiaModel);
+		spinDiaCumple.setBounds(133, 131, 164, 20);
+		panel.add(spinDiaCumple);
+		
+		SpinnerModel spinMesModel = new SpinnerNumberModel(1, 1, 12, 1);
+		spinMesCumple = new JSpinner(spinMesModel);
+		spinMesCumple.setBounds(133, 172, 164, 20);
+		panel.add(spinMesCumple);
+		
+		SpinnerModel spinAnioModel = new SpinnerNumberModel(1900, 1900, 2022, 1);
+		spinAnioCumple = new JSpinner(spinAnioModel);
+		spinAnioCumple.setBounds(133, 213, 164, 20);
+		panel.add(spinAnioCumple);
 
 		txtCalle = new JTextField();
-		txtCalle.setBounds(133, 131, 164, 20);
+		txtCalle.setBounds(133, 254, 164, 20);
 		panel.add(txtCalle);
 		txtCalle.setColumns(10);
 
 		spinAltura = new JSpinner();
-		spinAltura.setBounds(133, 172, 164, 20);
+		spinAltura.setBounds(133, 295, 164, 20);
 		panel.add(spinAltura);
 
 		spinPiso = new JSpinner();
-		spinPiso.setBounds(133, 213, 164, 20);
+		spinPiso.setBounds(133, 336, 164, 20);
 		panel.add(spinPiso);
 
 		txtDepto = new JTextField();
-		txtDepto.setBounds(133, 254, 164, 20);
+		txtDepto.setBounds(133, 377, 164, 20);
 		panel.add(txtDepto);
 		txtDepto.setColumns(10);
 		
 		comboPais = new JComboBox(dmhelp.getCountries());
-		comboPais.setBounds(133, 295, 164, 20);
+		comboPais.setBounds(133, 418, 164, 20);
 		panel.add(comboPais);
 		comboPais.addActionListener(a -> countryChosen(a));
 
 		comboProv = new JComboBox();
-		comboProv.setBounds(133, 339, 164, 20);
+		comboProv.setBounds(133, 459, 164, 20);
 		panel.add(comboProv);
 		comboProv.addActionListener(b -> stateChosen(b));
 
 		comboLocal = new JComboBox();
-		comboLocal.setBounds(133, 383, 164, 20);
+		comboLocal.setBounds(133, 500, 164, 20);
 		panel.add(comboLocal);
 
 		btnAgregarPersona = new JButton("Agregar");
-		btnAgregarPersona.setBounds(208, 424, 89, 23);
+		btnAgregarPersona.setBounds(208, 541, 89, 23);
 		panel.add(btnAgregarPersona);
 
 		this.setVisible(false);
@@ -165,34 +197,55 @@ public class VentanaPersona extends JFrame implements ActionListener{
 	public JTextField getTxtEmail() {
 		return txtEmail;
 	}
+	
+	public int getDiaCumple() {
+		return (int) spinDiaCumple.getValue();
+	}
+	
+	public int getMesCumple() {
+		return (int) spinMesCumple.getValue();
+	}
+	
+	public int getAnioCumple() {
+		return (int) spinAnioCumple.getValue();
+	}
 
 	public JTextField getTxtCalle() {
 		return txtCalle;
 	}
 
-	public JSpinner getSpinAltura() {
-		return spinAltura;
+	public int getAltura() {
+		return (int) spinAltura.getValue();
 	}
 
-	public JSpinner getSpinPiso() {
-		return spinPiso;
+	public int getPiso() {
+		return (int) spinPiso.getValue();
 	}
 
 	public JTextField getTxtDepto() {
 		return txtDepto;
 	}
 	
-	public JComboBox getComboPais() {
-		return comboPais;
+	public String getComboPais() {
+		if (comboPais.getSelectedItem() == null || comboPais.getSelectedItem().toString().equals("Select an option")){
+			return "";
+		}
+		return comboPais.getSelectedItem().toString();
 	}
 
 
-	public JComboBox getComboProv() {
-		return comboProv;
+	public String getComboProv() {
+		if (comboProv.getSelectedItem() == null){
+			return "";
+		}
+		return comboProv.getSelectedItem().toString();
 	}
 
-	public JComboBox getComboLocal() {
-		return comboLocal;
+	public String getComboLocal() {
+		if (comboLocal.getSelectedItem() == null){
+			return "";
+		}
+		return comboLocal.getSelectedItem().toString();
 	}
 
 	public JButton getBtnAgregarPersona() {
@@ -203,8 +256,14 @@ public class VentanaPersona extends JFrame implements ActionListener{
 		this.txtNombre.setText(null);
 		this.txtTelefono.setText(null);
 		this.txtEmail.setText(null);
-		this.spinAltura.setValue(null);
-		this.spinPiso.setValue(null);
+		this.spinDiaCumple.setValue(1);
+		this.spinMesCumple.setValue(1);
+		this.spinAnioCumple.setValue(1900);
+		this.txtCalle.setText(null);
+		this.spinAltura.setValue(0);
+		this.spinPiso.setValue(0);
+		this.txtDepto.setText(null);
+		
 
 		this.dispose();
 	}

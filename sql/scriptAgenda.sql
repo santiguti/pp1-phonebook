@@ -21,6 +21,7 @@ CREATE TABLE personas
   Nombre varchar(45) NOT NULL,
   Telefono varchar(20) NOT NULL,
   Email varchar(45),
+  Cumpleanios date,
   PRIMARY KEY (idPersona),
   FOREIGN KEY (idDomicilio) REFERENCES domicilios(idDomicilio)
 );

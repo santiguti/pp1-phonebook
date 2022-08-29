@@ -1,5 +1,6 @@
 package dto;
 
+import java.util.Date;
 
 public class PersonaDTO {
 	private int idPersona;
@@ -7,16 +8,16 @@ public class PersonaDTO {
 	private String nombre;
 	private String telefono;
 	private String email;
-	//private Date cumpleanios;
+	private Date cumpleanios;
 
 
-	public PersonaDTO(int idPersona, int idDomicilio, String nombre, String telefono, String email) {
+	public PersonaDTO(int idPersona, int idDomicilio, String nombre, String telefono, String email, Date cumpleanios) {
 		this.idPersona = idPersona;
 		this.idDomicilio = idDomicilio;
 		this.nombre = nombre;
 		this.telefono = telefono;
 		this.email = email;
-		//this.cumpleanios = cumpleanios;
+		this.cumpleanios = cumpleanios;
 		
 	}
 
@@ -59,6 +60,10 @@ public class PersonaDTO {
 
 	public String setEmail(String email) {
 		return this.email = email;
+	}
+	
+	public Date getCumpleanios() {
+		return this.cumpleanios;
 	}
 
 }
