@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <jdbcDataAdapter class="net.sf.jasperreports.data.jdbc.JdbcDataAdapterImpl">
-  <name>JasperMySQL</name>
+  <name>DataAdapter</name>
   <driver>com.mysql.jdbc.Driver</driver>
   <username>root</username>
   <password>root</password>

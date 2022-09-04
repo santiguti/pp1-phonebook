@@ -115,7 +115,7 @@ public class Controlador implements ActionListener {
 	}
 
 	private void mostrarReporte(ActionEvent r) {
-		ReporteAgenda reporte = new ReporteAgenda(agenda.obtenerPersonas());
+		ReporteAgenda reporte = new ReporteAgenda(agenda.obtenerPersonas(), agenda.obtenerDomicilios());
 		reporte.mostrar();
 	}
 
