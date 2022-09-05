@@ -313,10 +313,15 @@ public class VentanaEditar extends JFrame implements ActionListener{
 		this.spinDiaCumple.setValue(1);
 		this.spinMesCumple.setValue(1);
 		this.spinAnioCumple.setValue(1900);
+		String[] etiquetas = new String[] {"Friends", "Family", "Work", "Others"};
+		this.comboEtiqueta.setModel(new DefaultComboBoxModel<String>(etiquetas));
 		this.txtCalle.setText(null);
 		this.spinAltura.setValue(0);
 		this.spinPiso.setValue(0);
 		this.txtDepto.setText(null);
+		this.comboPais.setModel(new DefaultComboBoxModel<String>(dmhelp.getCountries()));
+		this.comboProv.setModel(new DefaultComboBoxModel());
+		this.comboLocal.setModel(new DefaultComboBoxModel());
 		
 
 		this.dispose();

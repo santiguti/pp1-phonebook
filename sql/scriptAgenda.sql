@@ -1,7 +1,7 @@
-DROP DATABASE if exists agenda;
+#DROP DATABASE if exists agenda;
 CREATE DATABASE agenda;
 USE agenda;
-SET FOREIGN_KEY_CHECKS=0;
+
 CREATE TABLE domicilios
 (
   idDomicilio int(11) NOT NULL AUTO_INCREMENT,
@@ -26,9 +26,3 @@ CREATE TABLE personas
   PRIMARY KEY (idPersona),
   FOREIGN KEY (idDomicilio) REFERENCES domicilios(idDomicilio)
 );
-
-USE agenda; 
-select * from personas;
-SELECT personas.nombre, personas.telefono, domicilios.pais, domicilios.provincia, domicilios.localidad
-FROM personas
-INNER JOIN domicilios ON domicilios.idDomicilio=personas.idDomicilio;

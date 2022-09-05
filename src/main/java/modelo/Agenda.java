@@ -14,10 +14,10 @@ public class Agenda
 	private PersonaDAO persona;
 	private DomicilioDAO domicilio;
 	
-	public Agenda(DAOAbstractFactory metodo_persistencia)
+	public Agenda(DAOAbstractFactory metodoPersistencia)
 	{
-		this.persona = metodo_persistencia.createPersonaDAO();
-		this.domicilio = metodo_persistencia.createDomicilioDAO();
+		this.persona = metodoPersistencia.createPersonaDAO();
+		this.domicilio = metodoPersistencia.createDomicilioDAO();
 	}
 	
 	public void agregarPersona(PersonaDTO nuevaPersona)
@@ -26,9 +26,9 @@ public class Agenda
 	}
 	
 
-	public void borrarPersona(PersonaDTO persona_a_eliminar) 
+	public void borrarPersona(PersonaDTO personaAEliminar) 
 	{
-		this.persona.delete(persona_a_eliminar);
+		this.persona.delete(personaAEliminar);
 	}
 	
 	public List<PersonaDTO> obtenerPersonas()
@@ -41,9 +41,9 @@ public class Agenda
 		this.domicilio.insert(nuevoDomicilio);
 	}
 
-	public void borrarDomicilio(DomicilioDTO domicilio_a_eliminar) 
+	public void borrarDomicilio(DomicilioDTO domicilioAEliminar) 
 	{
-		this.domicilio.delete(domicilio_a_eliminar);
+		this.domicilio.delete(domicilioAEliminar);
 	}
 	
 	public List<DomicilioDTO> obtenerDomicilios()

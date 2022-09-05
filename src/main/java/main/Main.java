@@ -15,11 +15,4 @@ public class Main
 		Controlador controlador = new Controlador(vista, modelo);
 		controlador.inicializar();
 	}
-	
-	/*
-	ToDo:
-	- Agregar las diferentes columnas al ReporteAgenda. Esto se hace modificando reportes/ReporteAgenda.jrxml (ver lo que mandaron por telegram)
-	- EDITAR CONTACTO
-	- Hacer documentación de todo y entregar
-	*/
 }

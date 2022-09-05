@@ -15,7 +15,7 @@ public class DomicilioHelper {
 
 	public String[] getCountries() {
 		try {
-			JSONArray worldCities = (JSONArray) new JSONParser().parse(new FileReader("exlibraries/worldCities.json"));
+			JSONArray worldCities = (JSONArray) new JSONParser().parse(new FileReader("worldCities.json"));
 
 			for (int i = 0; i < worldCities.size(); i++) {
 				JSONObject childrenObject = (JSONObject) worldCities.get(i);
@@ -36,7 +36,7 @@ public class DomicilioHelper {
 	public String[] getStatesOf(String countryParameter){
 		provincias = new ArrayList<String>();
 		try {
-			JSONArray worldCities = (JSONArray) new JSONParser().parse(new FileReader("exlibraries/worldCities.json"));
+			JSONArray worldCities = (JSONArray) new JSONParser().parse(new FileReader("worldCities.json"));
 
 			for (int i = 0; i < worldCities.size(); i++) {
 				JSONObject childrenObject = (JSONObject) worldCities.get(i);
@@ -58,7 +58,7 @@ public class DomicilioHelper {
 	public String[] getCitiesOf(String countryParameter, String subcountryParameter){
 		localidades = new ArrayList<String>();
 		try {
-			JSONArray worldCities = (JSONArray) new JSONParser().parse(new FileReader("exlibraries/worldCities.json"));
+			JSONArray worldCities = (JSONArray) new JSONParser().parse(new FileReader("worldCities.json"));
 
 			for (int i = 0; i < worldCities.size(); i++) {
 				JSONObject childrenObject = (JSONObject) worldCities.get(i);

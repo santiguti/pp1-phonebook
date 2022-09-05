@@ -59,8 +59,8 @@ public class Controlador implements ActionListener {
 	private void guardarPersona(ActionEvent p) {
 
 		String calle = this.ventanaPersona.getTxtCalle().getText();
-		int altura = ((int) this.ventanaPersona.getAltura());
-		int piso = ((int) this.ventanaPersona.getPiso());
+		int altura =  this.ventanaPersona.getAltura();
+		int piso = this.ventanaPersona.getPiso();
 		String depto = this.ventanaPersona.getTxtDepto().getText();
 		String pais = this.ventanaPersona.getComboPais();
 		String provincia = this.ventanaPersona.getComboProv();
@@ -115,7 +115,7 @@ public class Controlador implements ActionListener {
 	}
 
 	private void mostrarReporte(ActionEvent r) {
-		ReporteAgenda reporte = new ReporteAgenda(agenda.obtenerPersonas(), agenda.obtenerDomicilios());
+		ReporteAgenda reporte = new ReporteAgenda();
 		reporte.mostrar();
 	}
 
@@ -142,6 +142,7 @@ public class Controlador implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		//
 	}
 
 }
