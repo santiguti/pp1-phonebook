@@ -3,15 +3,33 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="284e0c88-a4b2-4ff8-98a2-d67b80bcffaf">
 	<parameter name="Fecha" class="java.lang.String"/>
 	<queryString language="SQL">
-		<![CDATA[SELECT personas.nombre, personas.telefono, domicilios.pais, domicilios.provincia, domicilios.localidad
+		<![CDATA[SELECT personas.nombre, personas.telefono, personas.destino, domicilios.pais, domicilios.provincia, domicilios.localidad
 FROM personas
 INNER JOIN domicilios ON domicilios.idDomicilio=personas.idDomicilio]]>
 	</queryString>
 	<field name="nombre" class="java.lang.String"/>
 	<field name="telefono" class="java.lang.String"/>
+	<field name="destino" class="java.lang.String"/>
 	<field name="pais" class="java.lang.String"/>
 	<field name="provincia" class="java.lang.String"/>
 	<field name="localidad" class="java.lang.String"/>
+	<group name="GroupPais">
+		<groupExpression><![CDATA[$F{pais}]]></groupExpression>
+		<groupHeader>
+			<band height="46">
+				<textField>
+					<reportElement x="2" y="8" width="248" height="30" uuid="4f2f7f5d-74de-48fd-9fda-0d082c22a16f"/>
+					<textElement>
+						<font size="22"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{pais}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="3" y="41" width="547" height="1" uuid="feac3a36-f8ca-45c6-8872-bf7ec64f4949"/>
+				</line>
+			</band>
+		</groupHeader>
+	</group>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -34,6 +52,9 @@ INNER JOIN domicilios ON domicilios.idDomicilio=personas.idDomicilio]]>
 					<reportElement x="390" y="2" width="102" height="20" uuid="4c9394fa-e0b1-4d17-9e4d-cc7deafc6164"/>
 					<text><![CDATA[Reporte generado el:]]></text>
 				</staticText>
+				<line>
+					<reportElement x="163" y="206" width="198" height="1" uuid="36c4cfba-344e-4e0c-835b-942ec74039f3"/>
+				</line>
 			</frame>
 		</band>
 	</title>
@@ -43,7 +64,7 @@ INNER JOIN domicilios ON domicilios.idDomicilio=personas.idDomicilio]]>
 				<reportElement x="0" y="4" width="550" height="24" uuid="d078763f-d7ce-421d-8cc3-c9d81fe255f9"/>
 				<staticText>
 					<reportElement x="3" y="2" width="160" height="20" uuid="8bd693bf-e003-4042-a1f8-881763b9ba1e"/>
-					<text><![CDATA[Reporte para el ejemplo Agenda]]></text>
+					<text><![CDATA[Agrupado y ordenado por Pais.]]></text>
 				</staticText>
 			</frame>
 		</band>
@@ -53,36 +74,29 @@ INNER JOIN domicilios ON domicilios.idDomicilio=personas.idDomicilio]]>
 			<frame>
 				<reportElement x="2" y="6" width="550" height="23" uuid="23209a62-cc9d-4b81-8e93-aa9cc3a92b36"/>
 				<staticText>
-					<reportElement x="0" y="1" width="130" height="21" uuid="6f5462fa-eb72-479f-bb27-fb5ef7144791"/>
-					<textElement textAlignment="Center">
+					<reportElement x="0" y="1" width="148" height="22" uuid="6f5462fa-eb72-479f-bb27-fb5ef7144791"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font size="14"/>
 					</textElement>
 					<text><![CDATA[Nombre y apellido]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="140" y="1" width="100" height="20" uuid="e2252ea3-811b-43d8-ae6b-e9b261b705f9"/>
-					<textElement textAlignment="Center">
+					<reportElement x="158" y="2" width="108" height="20" uuid="e2252ea3-811b-43d8-ae6b-e9b261b705f9"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font size="14"/>
 					</textElement>
 					<text><![CDATA[Teléfono]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="252" y="1" width="100" height="20" uuid="19bb62c9-3dee-4ac2-9fb7-57076b4ee771"/>
-					<textElement textAlignment="Center">
-						<font size="14"/>
-					</textElement>
-					<text><![CDATA[País]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="360" y="1" width="100" height="20" uuid="03439418-c314-460e-be0f-d3c44c48e183"/>
-					<textElement textAlignment="Center">
+					<reportElement x="290" y="2" width="130" height="20" uuid="03439418-c314-460e-be0f-d3c44c48e183"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font size="14"/>
 					</textElement>
 					<text><![CDATA[Provincia]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="465" y="1" width="78" height="20" uuid="a121a4ca-e3b4-42fe-96ae-7b4f38b0028c"/>
-					<textElement textAlignment="Center">
+					<reportElement x="430" y="2" width="110" height="20" uuid="a121a4ca-e3b4-42fe-96ae-7b4f38b0028c"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font size="14"/>
 					</textElement>
 					<text><![CDATA[Localidad]]></text>
@@ -91,34 +105,44 @@ INNER JOIN domicilios ON domicilios.idDomicilio=personas.idDomicilio]]>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="57" splitType="Stretch">
-			<line>
-				<reportElement x="250" y="-24" width="1" height="64" uuid="b7ccebe7-08a3-449b-a3cf-4cb0e94de212"/>
-			</line>
+		<band height="51" splitType="Stretch">
 			<textField>
-				<reportElement x="2" y="10" width="130" height="30" uuid="5f241205-8228-4bd4-ba1c-8229c11e4e06"/>
+				<reportElement x="2" y="2" width="148" height="20" uuid="5f241205-8228-4bd4-ba1c-8229c11e4e06"/>
+				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="255" y="10" width="100" height="30" uuid="4f2f7f5d-74de-48fd-9fda-0d082c22a16f"/>
-				<textFieldExpression><![CDATA[$F{pais}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="142" y="10" width="100" height="30" uuid="26ca3708-5212-4baf-bdda-2bd0c085705b"/>
+				<reportElement x="160" y="2" width="108" height="20" uuid="26ca3708-5212-4baf-bdda-2bd0c085705b"/>
+				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="362" y="10" width="100" height="30" uuid="152d361f-72f1-49ac-ab60-96e98a4e0c85"/>
+				<reportElement x="292" y="2" width="130" height="20" uuid="152d361f-72f1-49ac-ab60-96e98a4e0c85"/>
+				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{provincia}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="467" y="10" width="76" height="30" uuid="4b996cde-3402-4cac-bd0e-19848d958dfa"/>
+				<reportElement x="432" y="2" width="110" height="20" uuid="4b996cde-3402-4cac-bd0e-19848d958dfa"/>
+				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{localidad}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="280" y="2" width="1" height="20" uuid="3df1d178-0468-4ff0-b864-867a8691a28c"/>
+			</line>
+			<staticText>
+				<reportElement x="317" y="26" width="90" height="20" uuid="bd879f6f-7199-4252-8bc5-ecd1a74b6393"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Destino preferido:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="422" y="26" width="110" height="20" uuid="162ab7e4-c7d3-4105-ae51-ba79c22c8ac2"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{destino}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="7" splitType="Stretch"/>
+		<band height="4" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
 		<band height="33" splitType="Stretch">

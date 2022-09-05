@@ -14,7 +14,7 @@ import dto.PersonaDTO;
 
 public class PersonaDAOSQL implements PersonaDAO {
 	// cada vez que hay un campo nuevo hay que colocarlo en el statement
-	private static final String insert = "INSERT INTO personas(idPersona, idDomicilio, Nombre, Telefono, Email, Cumpleanios, Etiqueta) VALUES(?, ?, ?, ?, ?, ?, ?)";
+	private static final String insert = "INSERT INTO personas(idPersona, idDomicilio, Nombre, Telefono, Email, Cumpleanios, Etiqueta, Destino) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String delete = "DELETE FROM personas WHERE idPersona = ?";
 	private static final String readall = "SELECT * FROM personas";
 
@@ -39,6 +39,7 @@ public class PersonaDAOSQL implements PersonaDAO {
 			System.out.println("GETYEAR PERSONA" + persona.getCumpleanios().getYear() + 1900);
 			statement.setDate(6, sqlDate);
 			statement.setString(7, persona.getEtiqueta());
+			statement.setString(8, persona.getDestino());
 			if (statement.executeUpdate() > 0) {
 				conexion.commit();
 				isInsertExitoso = true;
@@ -97,6 +98,7 @@ public class PersonaDAOSQL implements PersonaDAO {
 		String email = resultSet.getString("Email");
 		Date cumpleanios = resultSet.getDate("Cumpleanios");
 		String etiqueta = resultSet.getString("Etiqueta");
-		return new PersonaDTO(idPersona, idDomicilio, nombre, tel, email, cumpleanios, etiqueta);
+		String destino = resultSet.getString("Destino");
+		return new PersonaDTO(idPersona, idDomicilio, nombre, tel, email, cumpleanios, etiqueta, destino);
 	}
 }

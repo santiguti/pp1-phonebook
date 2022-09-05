@@ -23,6 +23,7 @@ CREATE TABLE personas
   Email varchar(45),
   Cumpleanios date,
   Etiqueta varchar(10),
+  Destino varchar(50),
   PRIMARY KEY (idPersona),
   FOREIGN KEY (idDomicilio) REFERENCES domicilios(idDomicilio)
 );

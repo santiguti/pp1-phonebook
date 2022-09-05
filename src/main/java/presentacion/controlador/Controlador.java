@@ -53,6 +53,7 @@ public class Controlador implements ActionListener {
 			this.ventanaEditar.setDiaCumple(cal.get(Calendar.DAY_OF_MONTH));
 			this.ventanaEditar.setMesCumple(cal.get(Calendar.MONTH)+1);
 			this.ventanaEditar.setAnioCumple(cal.get(Calendar.YEAR));
+			
 		}
 	}
 
@@ -83,7 +84,8 @@ public class Controlador implements ActionListener {
 		cal.set(Calendar.DATE, this.ventanaPersona.getDiaCumple());
 		Date cumpleanios = new Date(cal.getTimeInMillis());
 		String etiqueta = this.ventanaPersona.getComboEtiqueta();
-		PersonaDTO nuevaPersona = new PersonaDTO(0, domicilioId, nombre, tel, email, cumpleanios, etiqueta);
+		String destino = this.ventanaPersona.getComboDestino();
+		PersonaDTO nuevaPersona = new PersonaDTO(0, domicilioId, nombre, tel, email, cumpleanios, etiqueta, destino);
 		this.agenda.agregarPersona(nuevaPersona);
 		this.refrescarTabla();
 		this.ventanaPersona.cerrar();
@@ -106,7 +108,8 @@ public class Controlador implements ActionListener {
 		System.out.println("editarpersona ventanaeditar.getdiacumple" + this.ventanaEditar.getDiaCumple());
 		System.out.println("calendario ventanaeditar " + cumpleanios);
 		String etiqueta = this.ventanaEditar.getComboEtiqueta();
-		PersonaDTO nuevaPersona = new PersonaDTO(personaId, domicilioId, nombre, tel, email, cumpleanios, etiqueta);
+		String destino = this.ventanaEditar.getComboDestino();
+		PersonaDTO nuevaPersona = new PersonaDTO(personaId, domicilioId, nombre, tel, email, cumpleanios, etiqueta, destino);
 		
 		this.agenda.borrarPersona(personas.get(filaSeleccionadaAEditar));
 		this.agenda.agregarPersona(nuevaPersona);

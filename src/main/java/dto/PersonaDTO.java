@@ -10,9 +10,10 @@ public class PersonaDTO {
 	private String email;
 	private Date cumpleanios;
 	private String etiqueta;
+	private String destino;
 
 	public PersonaDTO(int idPersona, int idDomicilio, String nombre, String telefono, String email, Date cumpleanios,
-			String etiqueta) {
+			String etiqueta, String destino) {
 		this.idPersona = idPersona;
 		this.idDomicilio = idDomicilio;
 		this.nombre = nombre;
@@ -20,6 +21,7 @@ public class PersonaDTO {
 		this.email = email;
 		this.cumpleanios = cumpleanios;
 		this.etiqueta = etiqueta;
+		this.destino = destino;
 
 	}
 
@@ -69,6 +71,10 @@ public class PersonaDTO {
 	
 	public String getEtiqueta() {
 		return this.etiqueta;
+	}
+	
+	public String getDestino() {
+		return this.destino;
 	}
 
 }

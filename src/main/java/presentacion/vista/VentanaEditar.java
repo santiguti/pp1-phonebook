@@ -25,15 +25,9 @@ public class VentanaEditar extends JFrame implements ActionListener{
 	private JSpinner spinDiaCumple;
 	private JSpinner spinMesCumple;
 	private JSpinner spinAnioCumple;
-	private JComboBox comboEtiqueta;
-	private JTextField txtCalle;
-	private JSpinner spinAltura;
-	private JSpinner spinPiso;
-	private JTextField txtDepto;
-	private JComboBox comboPais;
-	private JComboBox comboProv;
-	private JComboBox comboLocal;
 	private JButton btnEditarPersona;
+	private JComboBox comboEtiqueta;
+	private JComboBox comboDestino;
 	private DomicilioHelper dmhelp = new DomicilioHelper();
 	private static VentanaEditar INSTANCE;
 
@@ -86,36 +80,12 @@ public class VentanaEditar extends JFrame implements ActionListener{
 		panel.add(lblAnioCumple);
 		
 		JLabel lblEtiqueta = new JLabel("Etiqueta");
-		lblAnioCumple.setBounds(10, 257, 113, 14);
-		panel.add(lblAnioCumple);
+		lblEtiqueta.setBounds(10, 257, 113, 14);
+		panel.add(lblEtiqueta);
 
-		JLabel lblCalle = new JLabel("Calle");
-		lblCalle.setBounds(10, 298, 113, 14);
-		panel.add(lblCalle);
-
-		JLabel lblAltura = new JLabel("Altura");
-		lblAltura.setBounds(10, 339, 113, 14);
-		panel.add(lblAltura);
-
-		JLabel lblPiso = new JLabel("Piso");
-		lblPiso.setBounds(10, 380, 113, 14);
-		panel.add(lblPiso);
-
-		JLabel lblDepto = new JLabel("Depto");
-		lblDepto.setBounds(10, 421, 113, 14);
-		panel.add(lblDepto);
-
-		JLabel lblPais = new JLabel("Pais");
-		lblPais.setBounds(10, 462, 113, 14);
-		panel.add(lblPais);
-
-		JLabel lblProvincia = new JLabel("Provincia");
-		lblProvincia.setBounds(10, 503, 113, 14);
-		panel.add(lblProvincia);
-		
-		JLabel lblLocalidad = new JLabel("Localidad");
-		lblLocalidad.setBounds(10, 544, 113, 14);
-		panel.add(lblLocalidad);
+		JLabel lblDestino = new JLabel("Destino preferido");
+		lblDestino.setBounds(10, 298, 113, 14);
+		panel.add(lblDestino);
 
 		txtNombre = new JTextField();
 		txtNombre.setBounds(133, 8, 164, 20);
@@ -152,40 +122,13 @@ public class VentanaEditar extends JFrame implements ActionListener{
 		comboEtiqueta.setBounds(133, 254, 164, 20);
 		panel.add(comboEtiqueta);
 
-		txtCalle = new JTextField();
-		txtCalle.setBounds(133, 295, 164, 20);
-		panel.add(txtCalle);
-		txtCalle.setColumns(10);
-
-		spinAltura = new JSpinner();
-		spinAltura.setBounds(133, 336, 164, 20);
-		panel.add(spinAltura);
-
-		spinPiso = new JSpinner();
-		spinPiso.setBounds(133, 377, 164, 20);
-		panel.add(spinPiso);
-
-		txtDepto = new JTextField();
-		txtDepto.setBounds(133, 418, 164, 20);
-		panel.add(txtDepto);
-		txtDepto.setColumns(10);
 		
-		comboPais = new JComboBox(dmhelp.getCountries());
-		comboPais.setBounds(133, 459, 164, 20);
-		panel.add(comboPais);
-		comboPais.addActionListener(a -> countryChosen(a));
-
-		comboProv = new JComboBox();
-		comboProv.setBounds(133, 500, 164, 20);
-		panel.add(comboProv);
-		comboProv.addActionListener(b -> stateChosen(b));
-
-		comboLocal = new JComboBox();
-		comboLocal.setBounds(133, 541, 164, 20);
-		panel.add(comboLocal);
-
+		comboDestino = new JComboBox(dmhelp.getCountries());
+		comboDestino.setBounds(133, 291, 164, 20);
+		panel.add(comboDestino);
+		
 		btnEditarPersona = new JButton("Editar");
-		btnEditarPersona.setBounds(208, 582, 89, 23);
+		btnEditarPersona.setBounds(208, 336, 89, 23);
 		panel.add(btnEditarPersona);
 
 		this.setVisible(false);
@@ -245,63 +188,20 @@ public class VentanaEditar extends JFrame implements ActionListener{
 	}
 	
 	public String getComboEtiqueta() {
+		if (comboEtiqueta.getSelectedItem() == null || comboEtiqueta.getSelectedItem().toString().equals("Select an option")){
+			return "";
+		}
 		return comboEtiqueta.getSelectedItem().toString();
 	}
-
-	public JTextField getTxtCalle() {
-		return txtCalle;
-	}
 	
-	public void setTxtCalle(String txtCalle) {
-		this.txtCalle.setText(txtCalle);
-	}
-
-	public int getAltura() {
-		return (int) spinAltura.getValue();
-	}
-	
-	public void setAltura(int altura) {
-		this.spinAltura.setValue(altura);
-	}
-
-	public int getPiso() {
-		return (int) spinPiso.getValue();
-	}
-	
-	public void setPiso(int piso) {
-		this.spinPiso.setValue(piso);
-	}
-
-	public JTextField getTxtDepto() {
-		return txtDepto;
-	}
-	
-	public void setTxtDepto(String txtDepto) {
-		this.txtDepto.setText(txtDepto);
-	}
-	
-	public String getComboPais() {
-		if (comboPais.getSelectedItem() == null || comboPais.getSelectedItem().toString().equals("Select an option")){
+	public String getComboDestino() {
+		if (comboDestino.getSelectedItem() == null || comboDestino.getSelectedItem().toString().equals("Select an option")){
 			return "";
 		}
-		return comboPais.getSelectedItem().toString();
+		return comboDestino.getSelectedItem().toString();
 	}
-
-
-	public String getComboProv() {
-		if (comboProv.getSelectedItem() == null){
-			return "";
-		}
-		return comboProv.getSelectedItem().toString();
-	}
-
-	public String getComboLocal() {
-		if (comboLocal.getSelectedItem() == null){
-			return "";
-		}
-		return comboLocal.getSelectedItem().toString();
-	}
-
+	
+	
 	public JButton getBtnEditarPersona() {
 		return btnEditarPersona;
 	}
@@ -315,34 +215,9 @@ public class VentanaEditar extends JFrame implements ActionListener{
 		this.spinAnioCumple.setValue(1900);
 		String[] etiquetas = new String[] {"Friends", "Family", "Work", "Others"};
 		this.comboEtiqueta.setModel(new DefaultComboBoxModel<String>(etiquetas));
-		this.txtCalle.setText(null);
-		this.spinAltura.setValue(0);
-		this.spinPiso.setValue(0);
-		this.txtDepto.setText(null);
-		this.comboPais.setModel(new DefaultComboBoxModel<String>(dmhelp.getCountries()));
-		this.comboProv.setModel(new DefaultComboBoxModel());
-		this.comboLocal.setModel(new DefaultComboBoxModel());
+		this.comboDestino.setModel(new DefaultComboBoxModel<String>(dmhelp.getCountries()));
 		
-
 		this.dispose();
-	}
-	
-	public void countryChosen(ActionEvent a) {
-		String comboPaisValue = (String)comboPais.getSelectedItem().toString();
-        
-		if (!comboPaisValue.equals("Select an option")) {
-			comboProv.setModel(new DefaultComboBoxModel<String>(dmhelp.getStatesOf(comboPaisValue)));
-		}
-				
-	}
-	
-	public void stateChosen(ActionEvent b) {
-		String comboPaisValue = (String)comboPais.getSelectedItem().toString();
-		String comboProvValue = (String)comboProv.getSelectedItem().toString();
-        		
-		if (!comboPaisValue.equals("Select an option") && !comboProvValue.equals("Select an option")) {
-			comboLocal.setModel(new DefaultComboBoxModel<String>(dmhelp.getCitiesOf(comboPaisValue, comboProvValue)));
-		}
 	}
 
 	@Override

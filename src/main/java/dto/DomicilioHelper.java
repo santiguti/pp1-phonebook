@@ -25,15 +25,17 @@ public class DomicilioHelper {
 					paises.add(country);
 				}
 			}
-			paises.add(0, "Select an option");
+			if (!paises.get(0).equals("Select an option")) {
+				paises.add(0, "Select an option");
+			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		String[] array = paises.toArray(new String[0]);
 		return array;
 	}
-	
-	public String[] getStatesOf(String countryParameter){
+
+	public String[] getStatesOf(String countryParameter) {
 		provincias = new ArrayList<String>();
 		try {
 			JSONArray worldCities = (JSONArray) new JSONParser().parse(new FileReader("worldCities.json"));
@@ -42,20 +44,22 @@ public class DomicilioHelper {
 				JSONObject childrenObject = (JSONObject) worldCities.get(i);
 				String country = (String) childrenObject.get("country");
 				String subcountry = (String) childrenObject.get("subcountry");
-				
-				if(country.equals(countryParameter) && !provincias.contains(subcountry)) {
+
+				if (country.equals(countryParameter) && !provincias.contains(subcountry)) {
 					provincias.add(subcountry);
 				}
 			}
-			provincias.add(0, "Select an option");
+			if (!provincias.get(0).equals("Select an option")) {
+				provincias.add(0, "Select an option");
+			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		String[] array = provincias.toArray(new String[0]);
 		return array;
 	}
-	
-	public String[] getCitiesOf(String countryParameter, String subcountryParameter){
+
+	public String[] getCitiesOf(String countryParameter, String subcountryParameter) {
 		localidades = new ArrayList<String>();
 		try {
 			JSONArray worldCities = (JSONArray) new JSONParser().parse(new FileReader("worldCities.json"));
@@ -65,17 +69,20 @@ public class DomicilioHelper {
 				String country = (String) childrenObject.get("country");
 				String subcountry = (String) childrenObject.get("subcountry");
 				String city = (String) childrenObject.get("name");
-				
-				if(country.equals(countryParameter) && subcountry.equals(subcountryParameter) && !localidades.contains(city)) {
+
+				if (country.equals(countryParameter) && subcountry.equals(subcountryParameter)
+						&& !localidades.contains(city)) {
 					localidades.add(city);
 				}
 			}
-			localidades.add(0, "Select an option");
+			if (!localidades.get(0).equals("Select an option")) {
+				localidades.add(0, "Select an option");
+			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		String[] array = localidades.toArray(new String[0]);
 		return array;
 	}
-	
+
 }

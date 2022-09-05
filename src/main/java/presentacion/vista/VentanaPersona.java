@@ -34,6 +34,7 @@ public class VentanaPersona extends JFrame implements ActionListener{
 	private JComboBox comboPais;
 	private JComboBox comboProv;
 	private JComboBox comboLocal;
+	private JComboBox comboDestino;
 	private JButton btnAgregarPersona;
 	private DomicilioHelper dmhelp = new DomicilioHelper();
 	private static VentanaPersona INSTANCE;
@@ -87,8 +88,8 @@ public class VentanaPersona extends JFrame implements ActionListener{
 		panel.add(lblAnioCumple);
 		
 		JLabel lblEtiqueta = new JLabel("Etiqueta");
-		lblAnioCumple.setBounds(10, 257, 113, 14);
-		panel.add(lblAnioCumple);
+		lblEtiqueta.setBounds(10, 257, 113, 14);
+		panel.add(lblEtiqueta);
 
 		JLabel lblCalle = new JLabel("Calle");
 		lblCalle.setBounds(10, 298, 113, 14);
@@ -117,6 +118,10 @@ public class VentanaPersona extends JFrame implements ActionListener{
 		JLabel lblLocalidad = new JLabel("Localidad");
 		lblLocalidad.setBounds(10, 544, 113, 14);
 		panel.add(lblLocalidad);
+		
+		JLabel lblDestino = new JLabel("Destino preferido");
+		lblDestino.setBounds(10, 585, 113, 14);
+		panel.add(lblDestino);
 
 		txtNombre = new JTextField();
 		txtNombre.setBounds(133, 8, 164, 20);
@@ -184,9 +189,13 @@ public class VentanaPersona extends JFrame implements ActionListener{
 		comboLocal = new JComboBox();
 		comboLocal.setBounds(133, 541, 164, 20);
 		panel.add(comboLocal);
+		
+		comboDestino = new JComboBox(dmhelp.getCountries());
+		comboDestino.setBounds(133, 582, 164, 20);
+		panel.add(comboDestino);
 
 		btnAgregarPersona = new JButton("Agregar");
-		btnAgregarPersona.setBounds(208, 582, 89, 23);
+		btnAgregarPersona.setBounds(208, 623, 89, 23);
 		panel.add(btnAgregarPersona);
 
 		this.setVisible(false);
@@ -222,7 +231,17 @@ public class VentanaPersona extends JFrame implements ActionListener{
 	}
 	
 	public String getComboEtiqueta() {
+		if (comboEtiqueta.getSelectedItem() == null || comboEtiqueta.getSelectedItem().toString().equals("Select an option")){
+			return "";
+		}
 		return comboEtiqueta.getSelectedItem().toString();
+	}
+	
+	public String getComboDestino() {
+		if (comboDestino.getSelectedItem() == null || comboDestino.getSelectedItem().toString().equals("Select an option")){
+			return "";
+		}
+		return comboDestino.getSelectedItem().toString();
 	}
 	
 	public JTextField getTxtCalle() {
@@ -250,14 +269,14 @@ public class VentanaPersona extends JFrame implements ActionListener{
 
 
 	public String getComboProv() {
-		if (comboProv.getSelectedItem() == null){
+		if (comboProv.getSelectedItem() == null || comboProv.getSelectedItem().toString().equals("Select an option")){
 			return "";
 		}
 		return comboProv.getSelectedItem().toString();
 	}
 
 	public String getComboLocal() {
-		if (comboLocal.getSelectedItem() == null){
+		if (comboLocal.getSelectedItem() == null || comboLocal.getSelectedItem().toString().equals("Select an option")){
 			return "";
 		}
 		return comboLocal.getSelectedItem().toString();
@@ -283,7 +302,7 @@ public class VentanaPersona extends JFrame implements ActionListener{
 		this.comboPais.setModel(new DefaultComboBoxModel<String>(dmhelp.getCountries()));
 		this.comboProv.setModel(new DefaultComboBoxModel());
 		this.comboLocal.setModel(new DefaultComboBoxModel());
-		
+		this.comboDestino.setModel(new DefaultComboBoxModel<String>(dmhelp.getCountries()));
 
 		this.dispose();
 	}
